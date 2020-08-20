@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>セマンティックでアクセシブルなHTML講座デモ</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="header">
+    <h1>kintoneリンク集</h1>
+    <ul class="products">
+      <li><a href="#">サイボウズ Office</a></li>
+      <li><a href="#">Garoon</a></li>
+      <li><a href="#">メールワイズ</a></li>
+    </ul>
+  </div>
+
+  <div class="navigation">
+    <ul>
+      <li><a href="#">サイドメニュー</a></li>
+      <li><a href="#">ポータル</a></li>
+      <li><a href="#">通知</a></li>
+      <li><a href="#">ブックマーク</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="heading">スペース</h2>
+    <h3 class="sub-heading">お気に入りのスペース</h3>
+    <ul>
+      <li><a href="#">アクセシビリティプロジェクト</a></li>
+      <li><a href="#">デザイン＆リサーチ分報</a></li>
+      <li><a href="#">なんでも掲示</a></li>
+    </ul>
+    <b class="sub-heading">その他のスペース</b>
+    <ul>
+      <li><a href="#">ユーザーリサーチの場（デザインG）</a></li>
+    </ul>
+
+    <h2 class="heading">アプリ</h2>
+    <h2 class="sub-heading">お気に入りのアプリ</h2>
+    <ul>
+      <li><a href="#">タイムカード</a></li>
+    </ul>
+    <h4 class="sub-heading">その他のアプリ</h4>
+    <ul>
+      <li><a href="#">IT窓口</a></li>
+    </ul>
+
+    <h2 class="heading">リンクを追加</h2>
+    <form>
+      <div>
+        <span>リンク名</span>
+        <input type="text">
+      </div>
+      <div>
+        <span>URL</span>
+        <input type="text">
+      </div>
+      <div>
+        <span><input type="checkbox">お気に入り</span>
+      </div>
+      <div>
+        <span onclick="alert('add')" class="button">追加</span>
+        <a onclick="alert('cancel')" class="button">キャンセル</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <p><a href="#">Cybozu kintone</a></p>
+  </div>
+</body>
+
+</html>
