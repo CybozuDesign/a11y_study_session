@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./lib/style.css">
+    <title>書籍紹介 | cybozu</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <a href="#">
+                <img src="./static/logo.png" alt="cybozu" />
+            </a>
+        </h1>
+        <form class="search">
+            <div>
+                <input type="text" class="search-input" placeholder="商品名を入力" aria-label="商品検索" />
+            </div>
+            <div>
+                <!-- <button type="submit" class="search-button">検索</button> -->
+                <button type="submit" class="search-button" aria-label="検索"></button>
+            </div>
+        </form>
+    </header>
+
+    <main>
+        <div class="heading-container">
+            <h2 class="heading">サイボウズの書籍紹介</h2>
+            <div class="share">
+                <a href="#" class="share-twitter" title="Twitterでシェア"><i
+                        class="fab fa-2x fa-twitter-square icon-twitter"></i></a>
+                <a href="#" class="share-facebook" title="Facebookでシェア"><i
+                        class="fab fa-2x fa-facebook-square icon-facebook"></i></a>
+                <!-- 
+                    <a href="#" class="share-twitter" aria-label="Twitterでシェア"><i class="fab fa-2x fa-twitter-square icon-twitter"></i></a>
+                    <a href="#" class="share-facebook" aria-label="Facebookでシェア"><i class="fab fa-2x fa-facebook-square icon-facebook"></i></a> 
+                -->
+            </div>
+        </div>
+
+        <div class="books">
+            <div class="book">
+                <h3>チームのことだけ、考えた。</h3>
+                <img class="book-image" src="./static/book1.jpg" alt="写真：本の表紙" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button"><span>お気に入りに追加</span></button>
+            </div>
+            <div class="book">
+                <h3>会社というモンスターが、僕たちを不幸にしているのかもしれない。</h3>
+                <img class="book-image" src="./static/book2.jpg" alt="写真：本の表紙" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button"><span>お気に入りに追加</span></button>
+            </div>
+            <div class="book">
+                <h3>働きやすさを考えるメディアが自ら実践する、「未来のチーム」の作り方</h3>
+                <img class="book-image" src="./static/book3.jpg" alt="写真：本の表紙" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button"><span>お気に入りに追加</span></button>
+            </div>
+            <div class="book">
+                <h3>最軽量のマネジメント</h3>
+                <img class="book-image" src="./static/book4.png" alt="写真：本の表紙" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button"><span>お気に入りに追加</span></button>
+            </div>
+        </div>
+
+        <div class="complement">
+            <p><a href="https://cybozu.co.jp/company/books/">サイボウズの書籍についてさらに見る。</a></p>
+            <p><a href="https://cybozu.co.jp/company/work-style/">サイボウズの制度・風土・ツールについて知る。</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <h2 class="heading">連絡先</h2>
+        <div class="footer-content">
+            <div class="footer-content-left">
+                <img alt="写真：サイボウズのエントランス" src="./static/cybozu_entrance.jpg" class="footer-image" />
+            </div>
+            <div class="footer-content-right">
+                <div>
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span class="visually-hidden">電話番号：</span>
+                    xxx-xxx-xxxx
+                </div>
+                <div>
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span class="visually-hidden">メールアドレス：</span>
+                    cybozu@example.com
+                </div>
+            </div>
+        </div>
+        <div class="snslink">
+            <div>
+                <a href="#" class="snslink-twitter" title="Twitter公式アカウント"><i
+                        class="fab fa-4x fa-twitter-square icon-twitter"></i></a>
+                <!-- <a href="#" class="snslink-twitter" aria-label="Twitter公式アカウント"><i class="fab fa-4x fa-twitter-square icon-twitter"></i></a> -->
+            </div>
+            <div>
+                <a href="#" class="snslink-facebook" title="Facebook公式アカウント"><i
+                        class="fab fa-4x fa-facebook-square icon-facebook"></i></a>
+                <!-- <a href="#" class="snslink-facebook" aria-label="Facebook公式アカウント"><i class="fab fa-4x fa-facebook-square icon-facebook"></i></a> -->
+            </div>
+        </div>
+        <div class="chat-container">
+            <a onclick=" alert('chat')" title="チャットを開く">
+                <div class=" chat"></div>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="./lib/goodButton.js"></script>
+</body>
+
+</html>

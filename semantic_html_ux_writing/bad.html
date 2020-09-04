@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./lib/style.css">
+    <title>書籍紹介 | cybozu</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <a href="#">
+                <img alt="cybozu" src="./static/logo.png" />
+            </a>
+        </h1>
+        <form class="search">
+            <div>
+                <input type="text" class="search-input" placeholder="商品名を入力" aria-label="商品検索" />
+            </div>
+            <div>
+                <button type="submit" class="search-button">検索</button>
+            </div>
+        </form>
+    </header>
+
+    <main>
+        <div class="heading-container">
+            <h2 class="heading">サイボウズの書籍紹介</h2>
+            <div class="share">
+                <a href="#" class="share-twitter"><i class="fab fa-2x fa-twitter-square icon-twitter"></i></a>
+                <a href="#" class="share-facebook"><i class="fab fa-2x fa-facebook-square icon-facebook"></i></a>
+            </div>
+        </div>
+
+        <div class="books">
+            <div class="book">
+                <img alt="本" class="book-image" src="./static/book1.jpg" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button">お気に入りに追加</button>
+            </div>
+            <div class="book">
+                <img alt="本" class="book-image" src="./static/book2.jpg" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button">お気に入りに追加</button>
+            </div>
+            <div class="book">
+                <img alt="本" class="book-image" src="./static/book3.jpg" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button">お気に入りに追加</button>
+            </div>
+            <div class="book">
+                <img alt="本" class="book-image" src="./static/book4.png" />
+                <p class="book-detail"><a href="#">詳細はこちら</a></p>
+                <button type="button" class="bookmark-button">お気に入りに追加</button>
+            </div>
+        </div>
+
+        <div class="complement">
+            <p>さらにほかの書籍が知りたい場合は<a href="https://cybozu.co.jp/company/books/">ここをクリック</a>。</p>
+            <p>サイボウズの制度・風土・ツールについて知りたい場合は<a href="https://cybozu.co.jp/company/work-style/">ここをクリック</a>。</p>
+        </div>
+    </main>
+
+    <footer>
+        <h2 class="heading">連絡先</h2>
+        <div class="footer-content">
+            <div class="footer-content-left">
+                <img alt="写真：サイボウズのエントランス" src="./static/cybozu_entrance.jpg" class="footer-image" />
+            </div>
+            <div class="footer-content-right">
+                <div>
+                    <i class="fas fa-phone"></i>
+                    xxx-xxx-xxxx
+                </div>
+                <div>
+                    <i class="fas fa-envelope"></i>
+                    cybozu@example.com
+                </div>
+            </div>
+        </div>
+        <div class="snslink">
+            <div>
+                <a href="#" class="snslink-twitter"><i class="fab fa-4x fa-twitter-square icon-twitter"></i></a>
+            </div>
+            <div>
+                <a href="#" class="snslink-facebook"><i class="fab fa-4x fa-facebook-square icon-facebook"></i></a>
+            </div>
+        </div>
+        <div class="chat-container">
+            <a onclick=" alert('chat')">
+                <div class=" chat"></div>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="./lib/badButton.js"></script>
+</body>
+
+</html>

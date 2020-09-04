@@ -1,0 +1,155 @@
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.search {
+  display: flex;
+}
+
+.heading-container {
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  margin-top: 2rem;
+  flex: 1;
+}
+
+.share {
+  display: flex;
+}
+
+.share-twitter,
+.share-facebook {
+  display: block;
+  margin: 4px;
+}
+
+.icon-twitter {
+  color: #1da1f2;
+}
+
+.icon-facebook {
+  color: #3b5998;
+}
+
+.search-input {
+  height: 2rem;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: 1px solid #333;
+  width: 20rem;
+}
+
+.search-button {
+  background-image: url(../static/search.svg);
+  background-size: 2rem;
+  background-position: left;
+  background-repeat: no-repeat;
+  min-width: 2rem;
+  height: 2rem;
+  padding-left: 2rem;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  margin-left: 8px;
+}
+
+.books {
+  display: flex;
+  justify-content: center;
+}
+
+.book {
+  text-align: center;
+  max-width: 300px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.book-image {
+  width: 100%;
+  min-width: 0;
+  display: block;
+}
+
+.book-detail {
+  margin: 0;
+}
+
+.bookmark-button {
+  width: 13rem;
+  height: 2rem;
+}
+
+.bookmark-button.active span::before {
+  display: inline-block;
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-image: url("../static/check.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+.complement {
+  margin: 50px 0;
+}
+
+.footer-content {
+  display: flex;
+}
+
+.footer-content-left {
+  flex: 0;
+}
+
+.footer-content-right {
+  margin-left: 16px;
+}
+
+.footer-image {
+  width: 60%;
+  min-width: 500px;
+}
+
+.snslink {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+  padding: 10px 0;
+  border-top: 10px dotted #3498db;
+}
+
+.snslink-twitter,
+.snslink-facebook {
+  margin: 8px;
+}
+
+.chat-container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.chat {
+  background-image: url(../static/chat.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #ffa500;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -100000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
