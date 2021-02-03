@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="デザイン&amp;リサーチ ポカリチーム" />
+  <meta name="dcterms.date" content="2020-08-03" />
+  <title>すぐ実践できるアクセシブルなHTML ～より多くの人にコンテンツを届けるために～</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">すぐ実践できるアクセシブルなHTML ～より多くの人にコンテンツを届けるために～</h1>
+<p class="subtitle">セマンティックでアクセシブルなHTML講座（基本タグ編）</p>
+<p class="author">デザイン&amp;リサーチ ポカリチーム</p>
+<p class="date">2020-08-03</p>
+</header>
+<h2 id="agenda">Agenda</h2>
+<ul>
+<li><a href="#opening">オープニング</a></li>
+<li><a href="#screenreader-and-html">スクリーンリーダーはウェブページををどう読むのか</a></li>
+<li><a href="#to-thing-how-to-provide-meny-people">より多くの人にコンテンツを届けるために意識すること</a></li>
+<li><a href="#matome">まとめ</a></li>
+</ul>
+<h2 id="opening">オープニング</h2>
+<h3 id="introduction">自己紹介</h3>
+<ul>
+<li>SUGI(<a href="https://twitter.com/blindsoup2p1" target="_blank"><span class="citation" data-cites="blindsoup2p1">@blindsoup2p1</span></a>)</li>
+<li>デザイン&amp;リサーチ ポカリ（Poca11y）チーム</li>
+<li>視覚障害の全盲、日常生活でも仕事でもスクリーンリーダーを利用している</li>
+<li>プロダクトのアクセシビリティ向上と社内外への啓発をしている</li>
+<li>アクセシビリティについて質問・相談・要望などは、
+<ul>
+<li><span class="citation" data-cites="アクセシビリティ">@アクセシビリティ</span> へメンション</li>
+<li><a href="https://bozuman.cybozu.com/k/#/space/1956">アクセシビリティプロジェクト</a>スペースへ書き込み</li>
+</ul></li>
+</ul>
+<h2 id="皆さんが作ったウェブコンテンツは適切に伝わっているでしょうか">皆さんが作ったウェブコンテンツは、適切に伝わっているでしょうか。</h2>
+<p>知らぬ間に、一部のユーザーを排除したり、閲覧しにくいなどのストレスを与えたりしてはいないでしょうか。</p>
+<p>以下のユーザーに伝わっているでしょうか</p>
+<ul>
+<li>スクリーンリーダーユーザー
+<ul>
+<li>読めない箇所はないか</li>
+</ul></li>
+<li>ロービジョン
+<ul>
+<li>見えにくい・サイズが小さくはないか</li>
+</ul></li>
+<li>キーボードユーザー
+<ul>
+<li>タブキーでフォーカスできるか、エンターで押せるか</li>
+</ul></li>
+<li>肢体不自由
+<ul>
+<li>十分な操作領域はあるか</li>
+</ul></li>
+<li>モバイル・タッチユーザー
+<ul>
+<li>タッチで操作できるか</li>
+</ul></li>
+</ul>
+<h3 id="how-to-provide-meny-people">より多くの人にコンテンツを届けるために</h3>
+<p>✓ <strong>セマンティックな HTML を書く → アクセシブルになる</strong></p>
+<dl>
+<dt>セマンティックな HTML とは</dt>
+<dd>文章の意味に基づき、適切な用途のタグで意味付けされた HTML
+</dd>
+</dl>
+<h3 id="concept">コンセプト</h3>
+<p>誰に：<strong>HTML にかかわるエンジニア・ウェブ制作者の方々</strong> 何を：<strong>アクセシブルな HTML を書く利点と方法がわかった、普段から意識してみよう、と言って欲しい</strong></p>
+<p>すぐ実践できる基本的で汎用的な考え方やテクニックについて、<br />
+スクリーンリーダーのデモをしながら進めていきます。</p>
+<h2 id="screenreader-and-html">スクリーンリーダーはウェブページをどう読むのか</h2>
+<h3 id="what-is-screenreader">スクリーンリーダーとは</h3>
+<ul>
+<li>画面の情報を合成ン音声や点字として出力するソフトウェア</li>
+<li>全盲だけでなく、ロービジョンやディスレクシアの人にも使われている</li>
+<li>スクリーンリーダーにはいくつか種類がある
+<ul>
+<li>私が愛用しているのはオープンソースの NVDA</li>
+</ul></li>
+</ul>
+<h4 id="around-screenreader">身の回りにあるスクリーンリーダー</h4>
+<p>デフォルトで組み込まれています。</p>
+<ul>
+<li>iOS : VoiceOver</li>
+<li>MacOS : VoiceOver</li>
+<li>Android : TalkBack</li>
+<li>Windows : ナレーター</li>
+</ul>
+<h3 id="operation-screenreader">スクリーンリーダーの挙動</h3>
+<p>スクリーンリーダーはウェブページをどのように読むのでしょうか。</p>
+<ul>
+<li>HTML のタグを解釈して構造情報を読む
+<ul>
+<li>文字情報だけを読むわけではない</li>
+<li>タグの意味に基づいて、構造情報もフィードバックする</li>
+</ul></li>
+<li>基本的にタグの順番道理にシーケンシャルに読む
+<ul>
+<li>２次元構造ではなく、ページの先頭から最後までの１本の直線のイメージ</li>
+<li>右や左といった視覚的なレイアウトは読み上げからはわからない</li>
+</ul></li>
+</ul>
+<h4 id="html-の書き方がスクリーンリーダーの読み上げに影響する">HTML の書き方がスクリーンリーダーの読み上げに影響する</h4>
+<ul>
+<li>タグの意味を解釈して構造情報を読む</li>
+<li>タグの出現準に読む</li>
+</ul>
+<p>→ 適切な HTML を書くとアクセシブルになる</p>
+<h2 id="to-thing-how-to-provide-meny-people">より多くの人にコンテンツを届けるために意識すること</h2>
+<h3 id="html-のタグを正しく使うこと">HTML のタグを正しく使うこと</h3>
+<ul>
+<li>適切な要素を用いてマークアップする</li>
+<li>見た目だだけにとらわれず、構造的なマークアップを意識する</li>
+</ul>
+<h4 id="本講座では-4-つ紹介します">本講座では 4 つ紹介します</h4>
+<ol type="1">
+<li>見出しは見出しタグ</li>
+<li>ボタンは button タグ</li>
+<li>フォームのラベルは label タグ</li>
+<li>領域はランドマークのタグ</li>
+</ol>
+<h3 id="見出しは見出しタグ">1. 見出しは見出しタグ</h3>
+<p>○ h1-h6 タグを使う<br />
+× div と CSS や b タグで見出しっぽく見せる</p>
+<p>○ 見出しレベルをスキップしない<br />
+× 見出しレベルが飛び飛び（h2 の次に h4 など）</p>
+<h4 id="見出しのメリット">見出しのメリット</h4>
+<p>見出しタグでマークアップすることで</p>
+<ul>
+<li>スクリーンリーダーの見出しジャンプ機能が使える
+<ul>
+<li>&lt;h1&gt;-&lt;h6&gt;要素でマークアップされた見出しだけを拾い読みすることができる</li>
+<li>数字の 1 ～ 6 のキーを押すと特定の見出しレベルの見出しだけを拾い読みすることができる</li>
+</ul></li>
+<li>ページのアウトラインを把握できる
+<ul>
+<li>見出しジャンプ機能で見出しの階層関係を意識しながらたどれる</li>
+</ul></li>
+</ul>
+<h4 id="見出しに関する悪いユーザー体験">見出しに関する悪いユーザー体験</h4>
+<ul>
+<li>見出しがまったくない
+<ul>
+<li>アウトラインが把握できない</li>
+<li>目的の場所を探すのに上から下まで読み進めないといけない</li>
+</ul></li>
+<li>見出しが多すぎる
+<ul>
+<li>ごちゃごちゃしててアウトラインが把握しにくい</li>
+</ul></li>
+<li>領域全体が見出しになっている
+<ul>
+<li>見通しが非常に悪く、見出しジャンプも意味をなさない</li>
+</ul></li>
+</ul>
+<h4 id="見出しのユーザー価値">見出しのユーザー価値</h4>
+<ul>
+<li>スクリーンリーダーユーザー
+<ul>
+<li>見出しジャンプが使える</li>
+</ul></li>
+<li>検索エンジン
+<ul>
+<li>アウトラインを解釈できる</li>
+</ul></li>
+<li>ウェブ制作者
+<ul>
+<li>情報構造を意識することでページの品質が高まる</li>
+</ul></li>
+</ul>
+<h3 id="ボタンは-button-タグ">2. ボタンは button タグ</h3>
+<p>○ button タグを使う<br />
+× span や a タグを使う</p>
+<h4 id="ボタンのメリット">ボタンのメリット</h4>
+<p>button タグでマークアップすることで</p>
+<ul>
+<li>スクリーンリーダーがボタンであることを通知する</li>
+<li>タブキーでフォーカスできる</li>
+<li>（フォーカスできるので）エンターでボタンを押せる</li>
+<li>フォーカスインジケーターが表示される</li>
+</ul>
+<h4 id="ボタンに関する悪いユーザー体験">ボタンに関する悪いユーザー体験</h4>
+<ul>
+<li>span 実装のボタンが乱用されている
+<ul>
+<li>ボタンを見つけるのに苦労する</li>
+<li>そもそもクリックできることがわからず行き詰まる</li>
+</ul></li>
+<li>span/a/button 実装のボタンが混在している
+<ul>
+<li>パーツに統一感がなくて混乱する</li>
+</ul></li>
+</ul>
+<h4 id="ボタンのユーザー価値">ボタンのユーザー価値</h4>
+<ul>
+<li>スクリーンリーダーユーザー
+<ul>
+<li>ボタンを認識できる</li>
+</ul></li>
+<li>キーボードユーザー
+<ul>
+<li>フォーカスでき、押せる</li>
+</ul></li>
+<li>ウェブページの制作者
+<ul>
+<li>フォーカスやフォーカスインジケーターを別途実装しなくて済む</li>
+<li>タグ名からボタンを実装していることが一目瞭然</li>
+</ul></li>
+</ul>
+<h3 id="フォームのラベルは-label-タグ">3. フォームのラベルは label タグ</h3>
+<p>○ ラベルを label タグでマークアップする<br />
+× ラベルを span でマークアップする</p>
+<h4 id="フォームラベルのメリット">フォームラベルのメリット</h4>
+<p>ラベルを label タグで実装することで</p>
+<ul>
+<li>スクリーンリーダーでコントロールにフォーカスした時に、対応するラベル内容を読み上げる
+<ul>
+<li>何を入力するコントロールなのかが読み上げ内容から理解できる</li>
+</ul></li>
+<li>ラベルをクリックすることで、コントロールをアクティブにできる
+<ul>
+<li>クリック領域が広がる</li>
+</ul></li>
+</ul>
+<h4 id="フォームラベルの悪いユーザー体験">フォームラベルの悪いユーザー体験</h4>
+<ul>
+<li>チェックボックスやラジオボタンのラベルが label タグでマークアップされていない
+<ul>
+<li>どの項目にチェックしたのかがわからない</li>
+</ul></li>
+<li>入力項目がたくさんあるフォームで label タグでマークアップされていない
+<ul>
+<li>ラベルとコントロールの対応関係を見失う</li>
+<li>入力ミスが起き、時間がかかる</li>
+</ul></li>
+</ul>
+<h4 id="フォームラベルのユーザー価値">フォームラベルのユーザー価値</h4>
+<ul>
+<li>スクリーンリーダーユーザー
+<ul>
+<li>ラベルとコントロールの対応関係がわかるので入力しやすい</li>
+</ul></li>
+<li>ロービジョン、肢体不自由、広い意味でのウェブ閲覧者
+<ul>
+<li>クリック領域が広がるので、操作しやすい</li>
+</ul></li>
+</ul>
+<h3 id="領域はランドマークのタグ">4. 領域はランドマークのタグ</h3>
+<p>○ ヘッダーは header<br />
+○ ナビゲーションは navigation<br />
+○ コンテンツは main<br />
+○ フッターは footer</p>
+<p>× それぞれ div でマークアップする</p>
+<h4 id="ランドマークのタグのメリット">ランドマークのタグのメリット</h4>
+<ul>
+<li>スクリーンリーダーのランドマークジャンプ機能が使える
+<ul>
+<li>d キーでランドマークを拾い読みできる</li>
+</ul></li>
+<li>ページのアウトラインが把握できる
+<ul>
+<li>ランドマークジャンプで見出しよりも大きい単位でページ移動できる</li>
+</ul></li>
+</ul>
+<h4 id="ランドマークのタグのユーザー価値">ランドマークのタグのユーザー価値</h4>
+<ul>
+<li>スクリーンリーダーユーザー
+<ul>
+<li>ランドマークジャンプが使える</li>
+</ul></li>
+<li>検索エンジン
+<ul>
+<li>ページのアウトラインが解釈できる</li>
+</ul></li>
+<li>ウェブ閲覧者
+<ul>
+<li>ブラウザ拡張「<a href="http://matatk.agrip.org.uk/landmarks/">Landmarks</a>」</li>
+</ul></li>
+<li>ウェブ制作者
+<ul>
+<li>情報構造を意識することでページの品質が高まる</li>
+</ul></li>
+</ul>
+<h2 id="matome">まとめ</h2>
+<p>セマンティックな HTML を書くことで、多くのユーザーの価値を向上させられる</p>
+<p>最低限意識すると良い基本的なこと</p>
+<ul>
+<li>見出しは見出しタグ</li>
+<li>ボタンは button タグ</li>
+<li>フォームのラベルは label タグ</li>
+<li>領域はランドマークのタグ</li>
+</ul>
+</body>
+</html>
