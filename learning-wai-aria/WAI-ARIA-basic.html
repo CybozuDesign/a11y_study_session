@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="サイボウズ 開発本部 デザイン＆リサーチ　Poca11yチーム" />
+  <title>WAI-ARIAの基本</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">WAI-ARIAの基本</h1>
+<p class="subtitle">マークアップ勉強会</p>
+<p class="author">開発本部 デザイン＆リサーチ　Poca11yチーム</p>
+</header>
+<h2 id="目次">目次</h2>
+<ul>
+<li><a href="#concept">コンセプト</a></li>
+<li><a href="#wai-aria--basic-knowledge">WAI-ARIAの基礎知識</a></li>
+<li><a href="#wai-aria--merit">WAI-ARIAのメリット</a></li>
+<li><a href="#wai-aria--specification">WAI-ARIAの仕様</a></li>
+<li><a href="#wai-aria--principle">WAI-ARIAの原則</a></li>
+<li><a href="#implement-point">実装上の観点</a></li>
+<li><a href="#document">参考ドキュメント</a></li>
+</ul>
+<h2 id="concept">コンセプト</h2>
+<p>誰に：WAI-ARIA初心者（まったく知らない／なんとなく知っているレベル）のPG<br />
+何を：WAI-ARIAの原則がわかった、マークアップの時に意識してみよう</p>
+<p>以下のような疑問が解消されるイメージ：</p>
+<ul>
+<li>WAI-ARIA属性ってそもそも何？</li>
+<li>WAI-ARIAを実装するとどんな良いことがあるの？</li>
+<li>WAI-ARIAってどんな時に使う？どんな時には使わなくてよい？</li>
+</ul>
+<h2 id="wai-aria--basic-knowledge">WAI-ARIAの基礎知識</h2>
+<h3 id="概要">概要</h3>
+<blockquote>
+<p>WAI-ARIA は W3C によって定められた仕様で、要素に適用できる追加の意味論を提供する一連の HTML 属性を定義しており、それが欠けているどのような場所でもアクセシビリティを向上させます。</p>
+</blockquote>
+<p>（引用元：<a href="https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics">WAI-ARIAの基本 - ウェブ開発を学ぶ | MDN</a>）</p>
+<p>WAI-ARIAは(Web Accessibility Initiative - Accessible Rich Internet Applications)はの略称です。</p>
+<p>ポイント：</p>
+<ul>
+<li>HTMLの属性である</li>
+<li>HTMLのセマンティクスを補強する</li>
+</ul>
+<h4 id="htmlの属性である">HTMLの属性である</h4>
+<ul>
+<li>role属性とaria-**属性がある
+<ul>
+<li>role属性の値94種類</li>
+<li>aria-**属性48種類</li>
+</ul></li>
+<li>他の属性と同様、グローバル属性とタグ固有の属性がある</li>
+<li>他の属性同様、デフォルト値（暗黙知）や必須属性がある</li>
+</ul>
+<h4 id="htmlのセマンティクスを補強する">HTMLのセマンティクスを補強する</h4>
+<ul>
+<li>ネイティブにはないタグや属性でも、（専用のタグがあるかのように）意味付けできる</li>
+<li>→divやspan乱用ではなく、より構造的なマークアップができる</li>
+</ul>
+<p>用語解説：</p>
+<ul>
+<li>ネイティブとは、HTMLに標準で用意されているタグや属性のことを指す。ただし本資料ではWAI-ARIA属性を除くため、WAI-ARIA以外のHTMLのタグ・属性を表している。</li>
+<li>セマンティクスとは、タグや属性が持つ意味のこと。buttonタグにはデフォルトスタイルがあり、フォーカスできる・クリックできるといった意味（セマンティクス）を持っている。divやspanは汎用的なタグであり、それ自体に特別な意味（セマンティクス）はない。</li>
+</ul>
+<p>つまり、WAI-ARIA属性を使うと、</p>
+<ul>
+<li>ネイティブにないタグ（たとえば、タブやプログレスバー）でも</li>
+<li>WAI-ARIA属性でマークアップすることによって、</li>
+<li>タブやプログレスバーの意味付けができる（セマンティクスを補強できる）</li>
+</ul>
+<h3 id="具体例">具体例</h3>
+<h4 id="role属性">role属性</h4>
+<p>ネイティブなタグに対応するもの：</p>
+<ul>
+<li>button : role=“button”</li>
+<li>nav : role=“navigation”</li>
+<li>見出し(h) : role=“heading”</li>
+</ul>
+<p>ネイティブタグでは表せないもの：</p>
+<ul>
+<li>タブ : role=“tablist” role=“tab”</li>
+<li>ツリー : role=“tree” role=“treeitem”</li>
+<li>ダイアログ : role=“dialog”</li>
+</ul>
+<h4 id="aria-属性">aria-**属性</h4>
+<p>ネイティブ属性に対応するもの：</p>
+<ul>
+<li>required : aria-required=“true”</li>
+<li>checked : aria-checked=“true”</li>
+<li>readonly : aria-readonly=“true”</li>
+</ul>
+<p>ネイティブ属性では表せないもの：</p>
+<ul>
+<li>押されている : aria-pressed=“true|false”</li>
+<li>ポップアップを持っている : aria-haspopup=“menu|listbox|dialog”</li>
+<li>並び替えられることを表す : aria-sort=“none|ascending|descending”</li>
+</ul>
+<h2 id="wai-aria--merit">WAI-ARIAのメリット</h2>
+<h3 id="支援技術でアクセスできるようになる">支援技術でアクセスできるようになる</h3>
+<p>WAI-ARIAでセマンティクスを補強することで支援技術がブラウザのAPIを介して構造を解釈し、適切にユーザーにフィードバックできる。</p>
+<p>※以下の例はスクリーンリーダNVDAの場合を記載。</p>
+<h4 id="開閉ボタンの場合">開閉ボタンの場合</h4>
+<ul>
+<li>button（暗黙的なrole=“button”）…「ボタン」と読み上げる</li>
+<li>aria-expanded=“true”…「展開」と読み上げる</li>
+<li>aria-expanded=“false”…「折りたたみ」と読み上げる</li>
+<li>WAI-ARIA実装されていなかったら
+<ul>
+<li>開閉状態がわからない</li>
+</ul></li>
+</ul>
+<pre><code>&lt;button type=&quot;button&quot; aria-expanded=&quot;true&quot;&gt;ブックマーク&lt;/button&gt;</code></pre>
+<p>デモ：<a href="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/disclosure-faq.html">ディスクロージャ（開閉メニュー）</a></p>
+<h4 id="タブの場合">タブの場合</h4>
+<ul>
+<li>role=“tab”…「タブ」と読み上げる</li>
+<li>aria-selected=“true”…「選択」と読み上げる</li>
+<li>もしWAI-ARIA実装されていなかったら
+<ul>
+<li>タブであることがわからない</li>
+<li>選択状態がわからない</li>
+</ul></li>
+</ul>
+<pre><code>&lt;ul role=&quot;tablist&quot;&gt;
+  &lt;li role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;組織&lt;/li&gt;
+  &lt;li role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;グループ&lt;/li&gt;
+  &lt;li role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;その他&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>例：<a href="https://www.w3.org/TR/wai-aria-practices/examples/tabs/tabs-2/tabs.html">タブ</a></p>
+<h4 id="もっと複雑な事例">もっと複雑な事例</h4>
+<ul>
+<li>動的に値が切り替わるようなUIはWAI-ARIA実装しないと操作不可能になる場合がある</li>
+<li>リストボックス・ドロップダウン・スライダーなど</li>
+<li>→切り替わった現在値をaria-activedescendantやaria-valuenow属性で切り替える</li>
+</ul>
+<p>例：<a href="https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html">ドロップダウン</a></p>
+<h2 id="wai-aria--specification">WAI-ARIAの仕様</h2>
+<p>WAI-ARIA属性は、ロール・プロパティ・ステートの３つに分類することができる。<br />
+各種属性がセマンティクスにどういう影響を与えるのかをまとめる。</p>
+<h3 id="ロール">ロール</h3>
+<p>ロールは、基本的な性質・ふるまいのこと。</p>
+<ul>
+<li>ボタン…フォーカスでき、クリックできるという性質がある</li>
+<li>複数行テキストエリア…フォーカスでき、文字が入力できるという性質がある</li>
+<li>コンボボックス…フォーカスでき、文字が入力でき、候補を選択できるという性質がある</li>
+<li>ツリー…いくつかの階層があり、展開・折りたたみ・選択ができるという性質がある</li>
+</ul>
+<p>ロールの指定方法は２種類ある：</p>
+<ol type="1">
+<li>ネイティブのHTMLタグを使う
+<ul>
+<li>button / textarea / …</li>
+</ul></li>
+<li>role属性を使う
+<ul>
+<li>role=“combobox” / role=“tree” / role=“treeitem” / …</li>
+</ul></li>
+</ol>
+<p>ネイティブのHTMLタグには、対応するロールが含まれている（例：buttonにはrole=“button”） role属性を使うと、ネイティブのHTMLタグにはないロールを指定できる。</p>
+<h3 id="プロパティ">プロパティ</h3>
+<p>プロパティは、要素の普遍的な状態を表す。</p>
+<ul>
+<li>必須…かならず入力しなければならない状態を表す</li>
+<li>読み取り専用…入力できないが値のコピーはできるという状態を表す</li>
+<li>ポップアップ…ポップアップがあるかという状態を表す</li>
+<li>現在位置…ページネーションやフォームの入力ステップなどで現在の状態を表す</li>
+</ul>
+<p>プロパティにも指定方法が２種類ある：</p>
+<ol type="1">
+<li>ネイティブのHTML属性を使う
+<ul>
+<li>required / readonly</li>
+</ul></li>
+<li>aria-**属性を使う
+<ul>
+<li>aria-haspopup=“menu”</li>
+<li>aria-current=“page | step | location”</li>
+</ul></li>
+</ol>
+<p>ネイティブのHTML属性には、対応するプロパティが含まれている（例：required属性にはaria-required=“true”）。 aria-``属性を使うと、ネイティブのHTML属性にはないプロパティを指定できる。</p>
+<h3 id="ステート">ステート</h3>
+<p>ステートは、変動する状態を表す。</p>
+<ul>
+<li>チェック…切り替えられるチェックの状態を表す</li>
+<li>選択…選択状態を表す</li>
+<li>トグル…ボタンが押されているか押されていないかという状態を表す</li>
+<li>エラー…エラーかどうかの状態を表す</li>
+</ul>
+<p>ステートも指定方法が２種類ある：</p>
+<ol type="1">
+<li>ネイティブのHTML属性を使う
+<ul>
+<li>checked / selected / …</li>
+</ul></li>
+<li>aria-``属性を使う
+<ul>
+<li>aria-pressed=“true | false”</li>
+<li>aria-invalid=“true | false”</li>
+</ul></li>
+</ol>
+<p>ネイティブのHTML属性は、対応するステートが含まれている（例：checkedにはaria-checked）。 aria-**属性を使うと、ネイティブのHTML属性にはないステートを指定できる。</p>
+<h2 id="wai-aria--principle">WAI-ARIAの原則</h2>
+<p>WAI-ARIAを実装する時の基本的な考え方を記す。<br />
+ポイントはWAI-ARIAに依存せず、HTMLのネイティブタグ・属性を優先すること。<br />
+（参考： <a href="https://www.w3.org/TR/aria-in-html/#NOTES">Using ARIA</a>）</p>
+<h3 id="原則１">原則１</h3>
+<blockquote>
+<p>If you can use a native HTML element or attribute with the semantics and behavior you require already built in, instead of re-purposing an element and adding an ARIA role, state or property to make it accessible, then do so.</p>
+</blockquote>
+<p>必要なセマンティクスや動作が組み込まれたネイティブの HTML 要素または属性が存在する場合は、要素の転用と ARIA のロール、ステート、プロパティの追加でアクセシブルにする代わりに、ネイティブのものを使用する。</p>
+<ul>
+<li>ネイティブのHTMLでコーディングする
+<ul>
+<li>div[role=button] → button</li>
+<li>div[role=heading aria-level=2] → h2</li>
+</ul></li>
+<li>ネイティブでサポートされていない場合にWAI-ARIAを使用する
+<ul>
+<li>タブタグはない → div[role=tab]</li>
+<li>プログレスバーのタグがない → div[role=progressbar aria-valuenow=50]</li>
+</ul></li>
+</ul>
+<h3 id="原則２">原則２</h3>
+<blockquote>
+<p>Do not change native semantics, unless you really have to.</p>
+</blockquote>
+<p>本当に必要でない限り、ネイティブのセマンティクスを変更しない。</p>
+<p>例：開発者は見出しタブを作ろうとしている。</p>
+<pre><code>NG:ネイティブのセマンティクスを上書きしない
+
+&lt;h3 role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;あらゆる業種の、あらゆる人の、あらゆる仕事に&lt;/h3&gt;
+&lt;h3 role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;あなたのその仕事の数だけ、どんどん追加して使える&lt;/h3&gt;
+
+見出しのセマンティクスがタブで上書きされてしまう。
+スクリーンリーダユーザは見出しを認識できなくなる。</code></pre>
+<pre><code>OK：ネイティブのセマンティクスを残す
+
+&lt;div role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;
+  &lt;h3&gt;あらゆる業種の、あらゆる人の、あらゆる仕事に&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;
+  &lt;h3&gt;あなたのその仕事の数だけ、どんどん追加して使える&lt;/h3&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="原則３">原則３</h3>
+<blockquote>
+<p>All interactive ARIA controls must be usable with the keyboard.</p>
+</blockquote>
+<p>すべてのインタラクティブな ARIA コントロールは、キーボードで使用可能でなければならない。</p>
+<ul>
+<li>タブキーでフォーカスできる</li>
+<li>エンターやスペースでクリックできる</li>
+<li>矢印キーやHome/Endなどで値を変更できる</li>
+</ul>
+<h2 id="implement-point">実装上の観点</h2>
+<h3 id="ネイティブありき">ネイティブありき</h3>
+<p>原則にもあるとおり、ネイティブセマンティクスを活用すること。</p>
+<ul>
+<li>ネイティブのタグや属性を優先する</li>
+<li>ネイティブで表現できない（div・span実装になる）場合はWAI-ARIAでセマンティクスを補強する</li>
+<li>キーボードで操作できることを確認する</li>
+</ul>
+<h3 id="デザインとセットで考える">デザインとセットで考える</h3>
+<p>デザインで表すことをネイティブHTMLで表現できない時、WAI-ARIAを使う。 つまり、デザインとHTMLの情報量の差を埋めていくととらえる。</p>
+<p>例１：</p>
+<ol type="1">
+<li>ボタンを押すとon/offがわかるようにデザインされている</li>
+<li>HTMLでボタンは作れるが、押しているかいないかは表現できない</li>
+<li>デザインの情報と合わせるためにWAI-ARIAでトグル状態のセマンティクスを表す</li>
+</ol>
+<p>例２：</p>
+<ol type="1">
+<li>入力フォームのエラーが赤字でデザインされている</li>
+<li>CSSで赤にできるがHTMLのネイティブセマンティクスではエラーであることを表せない</li>
+<li>デザインとの差異を埋めるためにWAI-ARIAでエラーであることを表現する</li>
+</ol>
+<p>例３：</p>
+<ol type="1">
+<li>プルダウンメニューのデザインプロトがある</li>
+<li>プルダウンメニューはネイティブHTMLで表せない</li>
+<li>WAI-ARIAでメニューの項目や選択状態を表現する</li>
+<li>マウスと同等の操作をキーボードでもできるようにする</li>
+</ol>
+<h2 id="document">参考ドキュメント</h2>
+<ul>
+<li><a href="https://www.w3.org/TR/aria-in-html/">Using ARIA</a>
+<ul>
+<li>WAI-ARIAの原則</li>
+</ul></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.2/">Accessible Rich Internet Applications (WAI-ARIA) 1.2</a>
+<ul>
+<li>role属性・aria-**属性の逆引き辞書</li>
+</ul></li>
+<li><a href="https://www.w3.org/TR/wai-aria-practices-1.2/">WAI-ARIA オーサリング・プラクティス 1.2</a>
+<ul>
+<li>複雑なUIパーツをアクセシブルにする方法（サンプル・実装例）</li>
+</ul></li>
+</ul>
+</body>
+</html>
